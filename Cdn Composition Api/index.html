@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vue 3 Toy App</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <greetings></greetings>
+        <count></count>
+    </div>
+
+    <script>
+        const app = Vue.createApp({
+            data() {
+                return {
+                    count: 0
+                };
+            }
+        });
+
+        // Define the Greetings component using the Composition API
+        app.component('greetings', {
+            template: '<div><h1>Hello, Composition!</h1></div>'
+        });
+
+        // Define the Count component using the Composition API
+        app.component('count', {
+            template: `
+                <div>
+                    <p>Count: {{ count }}</p>
+                    <button @click="increment">Increment</button>
+                </div>
+            `,
+            setup() {
+                const count = Vue.ref(0);
+                const increment = () => {
+                    count.value++;
+                };
+                return {
+                    count,
+                    increment
+                };
+            }
+        });
+
+        // Mount the Vue 3 app instance
+        app.mount('#app');
+    </script>
+</body>
+</html>
